@@ -1,29 +1,44 @@
 'use strict';
 
-const webpack = require('webpack');
+const webpack = require('webpack')
 
-module.exports = {
-  entry: './example/example.js',
-  output: {
-    path: __dirname,
-    filename: './example/bundle.js',
-  },
-  context: __dirname,
+const env = process.env.NODE_ENV
+const config = {
   module: {
     loaders: [
-      {
-        test: /jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015', 'stage-2'],
-        },
-      },
-      {
-        test: /\.elm$/,
-        exclude: [/elm-stuff/, /node_modules/],
-        loader: 'elm-webpack'
-      },
+      { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
     ],
   },
+  output: {
+    library: 'realm',
+    libraryTarget: 'umd',
+  },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env)
+    }),
+  ],
 };
+
+if (env === 'production') {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        warnings: false,
+        screw_ie8: false,
+      },
+      mangle: {
+        screw_ie8: false,
+      },
+      output: {
+        screw_ie8: false,
+      },
+    })
+  );
+};
+
+module.exports = config;

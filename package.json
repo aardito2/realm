@@ -4,14 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "babel": "babel ./example/example.js --out-file ./example/example-build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:src": "eslint src build",
+    "check:src": "npm run lint:src",
+    "clean": "rimraf lib dist es coverage",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/realm.js",
+    "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/realm.min.js",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "prepublish": "npm run clean && npm run check:src && npm run build && check-es3-syntax lib/ dist/ --kill --print",
+    "babel": "babel ./example/example.js --out-file ./example/example-build.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
@@ -37,20 +44,38 @@
     "babel-plugin-transform-es2015-sticky-regex": "^6.8.0",
     "babel-plugin-transform-es2015-template-literals": "^6.8.0",
     "babel-plugin-transform-es2015-unicode-regex": "^6.11.0",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.8.0",
+    "babel-plugin-transform-es3-property-literals": "^6.8.0",
     "babel-plugin-transform-object-rest-spread": "^6.19.0",
     "babel-plugin-transform-react-display-name": "^6.8.0",
     "babel-plugin-transform-react-jsx": "^6.8.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
-    "lodash": "^4.17.2",
-    "react": "^15.4.1",
+    "check-es3-syntax-cli": "^0.1.3",
+    "cross-env": "^3.1.3",
+    "eslint": "^3.12.0",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
+    "rimraf": "^2.5.4",
     "webpack": "^1.14.0"
   },
   "dependencies": {
-    "elm-webpack-loader": "^3.1.0"
-  }
+    "elm-webpack-loader": "^3.1.0",
+    "lodash": "^4.17.2",
+    "lodash-es": "^4.17.2",
+    "react": "^15.4.1",
+    "loose-envify": "^1.3.0"
+  },
+  "browserify": {
+    "transform": [
+      "loose-envify"
+    ]
+  },
+  "npmName": "realm"
 }

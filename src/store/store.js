@@ -17,18 +17,15 @@ export default class Store {
 
       const listeners = _nextListeners.get(this);
       _currentListeners.set(this, listeners);
-      for (const listener of listeners) {
-        listener();
-      }
-
+      listeners.forEach(listener => listener());
     });
   }
 
-  getState = () => {
+  getState() {
     return _state.get(this);
   }
 
-  dispatch = (action) => {
+  dispatch(action) {
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +
@@ -44,7 +41,7 @@ export default class Store {
     }
 
     if (typeof action.payload === 'undefined') {
-      action.payload = null;
+      action.payload = null; // eslint-disable-line no-param-reassign
     }
 
     const ports = _app.get(this).ports;
@@ -58,7 +55,7 @@ export default class Store {
     return action;
   }
 
-  subscribe = (listener) => {
+  subscribe(listener) {
     if (typeof listener !== 'function') {
       throw new Error('Expected listener to be a function.');
     }

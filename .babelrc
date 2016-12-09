@@ -22,6 +22,20 @@
     "transform-object-rest-spread",
     "transform-class-properties",
     "transform-react-jsx",
+    "transform-es3-member-expression-literals",
+    "transform-es3-property-literals",
     "syntax-jsx"
-  ]
+  ],
+  "env": {
+    "commonjs": {
+      "plugins": [
+        ["transform-es2015-modules-commonjs", { "loose": true }]
+      ]
+    },
+    "es": {
+      "plugins": [
+        "./build/use-lodash-es"
+      ]
+    }
+  }
 }

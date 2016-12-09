@@ -3,5 +3,7 @@ npm-debug.log
 .DS_Store
 *bundle
 dist*
+lib
+es
 elm-stuff*
 *store.js
