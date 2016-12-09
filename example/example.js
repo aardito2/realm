@@ -5,7 +5,6 @@ import { createStore, createAction } from '../src';
 import elmStore from './store.elm';
 
 const store = createStore(elmStore.Store, ({ value: 0, inputString: '' }));
-console.log(store);
 
 const InnerComponent = ({
   value,

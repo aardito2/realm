@@ -17,17 +17,22 @@ main =
         , subscriptions = subscriptions
         }
 
-
-init : (Model, Cmd msg)
-init = ({ value = 0, inputString = "" }, nextState <| encodeModel { value = 0, inputString = "" })
-
 type alias Model =
     { value : Int
     , inputString: String
     }
 
-encodeModel : Model -> Json.Encode.Value
-encodeModel model =
+
+initialState : Model
+initialState = { value = 0
+               , inputString = ""
+               }
+
+init : (Model, Cmd Msg)
+init = (initialState, send initialState)
+
+encodeState : Model -> Json.Encode.Value
+encodeState model =
     Json.Encode.object
         [ ("value", Json.Encode.int <| model.value)
         , ("inputString", Json.Encode.string <| model.inputString)
@@ -40,7 +45,7 @@ type Msg
     | SetString String
 
 send : Model -> Cmd Msg
-send = nextState << encodeModel
+send = nextState << encodeState
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
