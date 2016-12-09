@@ -20,4 +20,4 @@ const setString = createAction(SET_STRING, 'foo');
 ```
 
 ### Elm
-See store.elm to see how the Elm store itself should be set up.
+See <a href="https://github.com/aardito2/realm/blob/master/example/store.elm">store.elm</a> to see how the Elm store itself should be set up.
