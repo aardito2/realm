@@ -1,12 +1,16 @@
 'use strict';
 
-const webpack = require('webpack')
+const webpack = require('webpack');
 
-const env = process.env.NODE_ENV
+const env = process.env.NODE_ENV;
 const config = {
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
+      { test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: [/node_modules/, /example/, /elm-stuff/],
+        presets: ['es2015', 'react', 'stage-0']
+      },
     ],
   },
   output: {

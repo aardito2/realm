@@ -3,49 +3,48 @@ port module Store exposing (..)
 import Json.Encode
 import Json.Decode
 
+import Realm exposing (updateState)
+
 import Platform exposing (program)
-import Html exposing (..)
-import Html.Attributes exposing (style)
 import String exposing (toUpper)
 
-port nextState : Json.Encode.Value -> Cmd msg
+port nextState : Model -> Cmd msg
 
+main : Program (Maybe Model) Model Msg
 main =
-    Platform.program
+    Platform.programWithFlags
         { init = init
-        , update = update
+        , update = updateState update nextState
         , subscriptions = subscriptions
         }
 
+init : Maybe Model -> (Model, Cmd msg)
+init flags = Maybe.withDefault emptyModel flags ! []
+
 type alias Model =
     { value : Int
-    , inputString: String
+    , inputString : String
+    , user : Maybe User
     }
 
 
-initialState : Model
-initialState = { value = 0
-               , inputString = ""
-               }
+emptyModel : Model
+emptyModel = { value = 0
+             , inputString = ""
+             , user = Nothing
+             }
 
-init : (Model, Cmd Msg)
-init = (initialState, send initialState)
-
-encodeState : Model -> Json.Encode.Value
-encodeState model =
-    Json.Encode.object
-        [ ("value", Json.Encode.int <| model.value)
-        , ("inputString", Json.Encode.string <| model.inputString)
-        ]
+type alias User
+    = { username : String
+      , age : Int
+      }
 
 type Msg
     = NoOp
     | Increment
     | Decrement
     | SetString String
-
-send : Model -> Cmd Msg
-send = nextState << encodeState
+    | SetUser (Maybe User)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -54,30 +53,30 @@ update msg model =
             model ! []
 
         Increment ->
-            let
-                newModel = ({ model | value = model.value + 1})
-            in
-                (newModel, send newModel)
+            ({ model | value = model.value + 1})
+              ! []
 
         Decrement ->
-            let
-                newModel = ({ model | value = max 0 (model.value - 1)})
-            in
-                (newModel, send newModel)
+            ({ model | value = max 0 (model.value - 1)})
+              ! []
 
         SetString str ->
-            let
-                newModel = ({ model | inputString = toUpper str })
-            in
-                (newModel, send newModel)
+            ({ model | inputString = toUpper str })
+              ! []
+
+        SetUser user ->
+            ({ model | user = user })
+              ! []
 
 port increment : (() -> msg) -> Sub msg
 port decrement : (() -> msg) -> Sub msg
 port setString : (String -> msg) -> Sub msg
+port setUser : (Maybe User -> msg) -> Sub msg
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch[ increment <| always Increment
              , decrement <| always Decrement
              , setString SetString
+             , setUser SetUser
              ]

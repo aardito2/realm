@@ -3,20 +3,22 @@
 import React, { PropTypes } from 'react';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
-import { createStore, createAction } from '../src';
+import { createStore, createAction } from '../lib';
 import elmStore from './store.elm';
 
 // STORE
-const store = createStore(elmStore.Store, ({ value: 0, inputString: '' }));
+const store = createStore(elmStore.Store, ({ value: 0, inputString: '' , user: null }));
 
 // ACTIONS
 const INCREMENT = 'increment';
 const DECREMENT = 'decrement';
 const SET_STRING = 'setString';
+const SET_USER = 'setUser';
 
 const increment = createAction(INCREMENT);
 const decrement = createAction(DECREMENT);
 const setString = createAction(SET_STRING);
+const setUser = createAction(SET_USER);
 
 const InnerComponent = ({
   value,
@@ -24,6 +26,8 @@ const InnerComponent = ({
   incrementValue,
   decrementValue,
   setInput,
+  userSet,
+  user,
 }) => (
   <div>
     {value}
@@ -32,6 +36,9 @@ const InnerComponent = ({
     <input onInput={setInput} />
     {inputString}
     {() => console.log('inputString: ', inputString)}
+    <button onClick={userSet}>SET TEST USER</button>
+    {user && user.username}
+    {user && user.age}
   </div>
 )
 
@@ -44,11 +51,12 @@ InnerComponent.propTypes = {
 };
 
 
-const mapState = ({ value, inputString }) => ({ value, inputString });
+const mapState = ({ value, inputString, user }) => ({ value, inputString, user });
 const mapDispatch = dispatch => ({
   incrementValue: () => dispatch(increment()),
   decrementValue: () => dispatch(decrement()),
   setInput: evt => dispatch(setString(evt.target.value)),
+  userSet: () => dispatch(setUser({ username: 'username', age: 12 }))
 });
 
 const OuterComponent = connect(mapState, mapDispatch)(InnerComponent);

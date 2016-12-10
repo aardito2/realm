@@ -7,18 +7,23 @@ const _nextListeners = new WeakMap();
 
 export default class Store {
   constructor(elmApp, initialState = {}) {
-    _app.set(this, elmApp.worker());
+    _app.set(this, elmApp.worker(initialState));
     _state.set(this, initialState);
     _currentListeners.set(this, []);
-    _nextListeners.set(this, _currentListeners);
+    _nextListeners.set(this, []);
 
     _app.get(this).ports.nextState.subscribe((nextState) => {
+      console.log(nextState);
       _state.set(this, nextState);
 
       const listeners = _nextListeners.get(this);
       _currentListeners.set(this, listeners);
       listeners.forEach(listener => listener());
     });
+
+    this.dispatch = this.dispatch.bind(this);
+    this.subscribe = this.subscribe.bind(this);
+    this.getState = this.getState.bind(this);
   }
 
   getState() {
@@ -26,6 +31,7 @@ export default class Store {
   }
 
   dispatch(action) {
+    console.log(action);
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +

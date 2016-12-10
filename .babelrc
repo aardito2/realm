@@ -20,11 +20,16 @@
     "transform-es2015-block-scoping",
     ["transform-es2015-modules-commonjs", { "loose": true }],
     "transform-object-rest-spread",
-    "transform-class-properties",
     "transform-react-jsx",
     "transform-es3-member-expression-literals",
     "transform-es3-property-literals",
-    "syntax-jsx"
+    "syntax-jsx",
+    "transform-class-properties"
+  ],
+  presets: [
+    'es2015',
+    'react',
+    'stage-0'
   ],
   "env": {
     "commonjs": {
