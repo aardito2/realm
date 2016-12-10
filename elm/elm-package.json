@@ -4,7 +4,7 @@
     "repository": "https://github.com/aardito2/realm.git",
     "license": "BSD3",
     "source-directories": [
-        "./elm"
+        "../elm"
     ],
     "exposed-modules": [
         "Realm"
