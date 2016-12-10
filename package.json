@@ -1,5 +1,5 @@
 {
-  "name": "realm",
+  "name": "@aardito2/realm",
   "version": "0.1.0",
   "description": "Redux implementation using Elm for state and updates",
   "browser": "dist/realm.js",
