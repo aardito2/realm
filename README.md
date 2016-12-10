@@ -7,7 +7,8 @@
 
 #### createStore(elmStore, initialState = {})
 ```javascript
-import elmStore from './store.elm'; // using elm-webpack-loader
+// using elm-webpack-loader
+import elmStore from './store.elm';
 
 const initialState = {};
 const store = createStore(elmStore.Store, initialState);
@@ -27,4 +28,15 @@ dispatch(setString('foo'));
 ```
 
 ### Elm
-See <a href="https://github.com/aardito2/realm/blob/master/example/store.elm">store.elm</a> to see how the Elm store itself should be set up.
+```shell
+elm-package install @aardito2/realm
+```
+
+Your Elm file should be a Platform.programWithFlags. In main, your update should use Realm.updateState, which takes an outgoing port and an update function and returns a new update function which will automatically send your updated state back to JavaScript.
+
+For each action used in JavaScript, two things are required:
+
+1) An incoming port with the same name as the action type.
+2) A subscription to the above port which converts the incoming action into a Msg to be handled by your update function.
+
+See <a href="https://github.com/aardito2/realm/blob/master/example/store.elm">store.elm</a> for a full example of the structure of the store in Elm.
