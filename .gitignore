@@ -1,9 +1,10 @@
 node_modules
 npm-debug.log
 .DS_Store
-*bundle
+*bundle*
 dist*
 lib
 es
 elm-stuff*
 *store.js
+example/*bundle*
