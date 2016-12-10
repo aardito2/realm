@@ -6,14 +6,14 @@
 
 ### JavaScript
 
-#### createStore
+#### createStore(elmStore, initialState={})
 ```javascript
 import elmStore from './store.elm'; // using elm-webpack-loader
 
 const initialState = {};
 const store = createStore(elmStore.Store, initialState);
 ```
-#### createAction
+#### createAction(actionType) => payload => action
 ```javascript
 const INCREMENT = 'increment';
 const increment = createAction(INCREMENT);
@@ -21,7 +21,7 @@ const increment = createAction(INCREMENT);
 const SET_STRING = 'set_string';
 const setString = createAction(SET_STRING);
 ```
-#### dispatch
+#### dispatch(action)
 ```javascript
 dispatch(increment());
 dispatch(setString('foo'));
