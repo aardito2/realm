@@ -1,8 +1,17 @@
 {
   "name": "realm",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Redux implementation using Elm for state and updates",
+  "browser": "dist/realm.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
   "scripts": {
     "lint:src": "eslint src build",
     "check:src": "npm run lint:src",
@@ -15,9 +24,20 @@
     "prepublish": "npm run clean && npm run check:src && npm run build && check-es3-syntax lib/ dist/ --kill --print",
     "babel": "babel ./example/example.js --out-file ./example/example-build.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "redux",
+    "elm",
+    "state",
+    "functional",
+    "immutable",
+    "flux",
+    "predictable"
+  ],
+  "author": "Anthony Ardito (https://github.com/aardito2)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aardito2/realm/issues"
+  },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
@@ -66,10 +86,8 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
-    "elm-webpack-loader": "^3.1.0",
     "lodash": "^4.17.2",
     "lodash-es": "^4.17.2",
-    "react": "^15.4.1",
     "loose-envify": "^1.3.0"
   },
   "browserify": {
@@ -77,5 +95,13 @@
       "loose-envify"
     ]
   },
-  "npmName": "realm"
+  "npmName": "realm",
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ]
 }
