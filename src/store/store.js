@@ -13,7 +13,6 @@ export default class Store {
     _nextListeners.set(this, []);
 
     _app.get(this).ports.nextState.subscribe((nextState) => {
-      console.log(nextState);
       _state.set(this, nextState);
 
       const listeners = _nextListeners.get(this);
@@ -31,7 +30,6 @@ export default class Store {
   }
 
   dispatch(action) {
-    console.log(action);
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +
