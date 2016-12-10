@@ -6,7 +6,7 @@ const _currentListeners = new WeakMap();
 const _nextListeners = new WeakMap();
 
 export default class Store {
-  constructor(elmApp, initialState) {
+  constructor(elmApp, initialState = {}) {
     _app.set(this, elmApp.worker());
     _state.set(this, initialState);
     _currentListeners.set(this, []);
