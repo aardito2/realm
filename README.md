@@ -1,6 +1,5 @@
 # realm
 > Realm is an alternate implementation of Redux using Elm. Actions are created in JavaScript with a payload, which is sent through ports into your Elm store.
-> It is compatible with <a href="https://github.com/reactjs/react-redux">react-redux</a>.
 
 ## Usage
 
