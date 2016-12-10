@@ -5,18 +5,26 @@
 ## Usage
 
 ### JavaScript
+
+#### createStore
 ```javascript
+import elmStore from './store.elm'; // using elm-webpack-loader
 
-// createStore
-const initialState = {} // initial state for your store 
+const initialState = {};
 const store = createStore(elmStore.Store, initialState);
-
-// createAction
+```
+#### createAction
+```javascript
 const INCREMENT = 'increment';
 const increment = createAction(INCREMENT);
 
 const SET_STRING = 'set_string';
-const setString = createAction(SET_STRING, 'foo');
+const setString = createAction(SET_STRING);
+```
+#### dispatch
+```javascript
+dispatch(increment());
+dispatch(setString('foo'));
 ```
 
 ### Elm
