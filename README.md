@@ -1,5 +1,5 @@
 # realm
-> Realm is an alternate implementation of Redux using Elm. Actions are created in JavaScript with a payload, which is sent through ports into your Elm store.
+> Realm is an alternate implementation of Redux using Elm. Actions are created in JavaScript with a payload, which is sent through ports into your Elm store. Elm performs the role of a reducer in Redux, and sends the new state back to JavaScript.
 
 ## Usage
 
