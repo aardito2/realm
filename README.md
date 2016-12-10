@@ -6,7 +6,7 @@
 
 ### JavaScript
 
-#### createStore(elmStore, initialState={})
+#### createStore(elmStore, initialState = {})
 ```javascript
 import elmStore from './store.elm'; // using elm-webpack-loader
 
