@@ -7,4 +7,5 @@ lib
 es
 elm-stuff*
 *store.js
-example/*bundle*
+example/bundle.js
+example/bundle.js.map
