@@ -5,13 +5,14 @@
 ## Usage
 
 ### JavaScript
+
+#### createStore
 ```javascript
-
-// createStore
-const initialState = {} // initial state for your store 
+const initialState = {};
 const store = createStore(elmStore.Store, initialState);
-
-// createAction
+```
+#### createAction
+```javascript
 const INCREMENT = 'increment';
 const increment = createAction(INCREMENT);
 
