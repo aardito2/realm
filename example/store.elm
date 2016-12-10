@@ -1,11 +1,8 @@
 port module Store exposing (..)
 
-import Json.Encode
-import Json.Decode
-
 import Realm exposing (updateState)
 
-import Platform exposing (program)
+import Platform exposing (programWithFlags)
 import String exposing (toUpper)
 
 port nextState : Model -> Cmd msg

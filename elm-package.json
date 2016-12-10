@@ -1,5 +1,5 @@
 {
-    "version": "1.0.2",
+    "version": "1.0.3",
     "summary": "Helper function for use with realm npm package",
     "repository": "https://github.com/aardito2/realm.git",
     "license": "BSD3",
