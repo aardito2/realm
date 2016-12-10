@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+    "summary": "Helper function for use with realm npm package",
+    "repository": "https://github.com/aardito2/realm.git",
+    "license": "BSD3",
+    "source-directories": [
+        "."
+    ],
+    "exposed-modules": [
+        "Realm"
+    ],
+    "dependencies": {
+        "elm-lang/core": "5.0.0 <= v < 6.0.0"
+    },
+    "elm-version": "0.18.0 <= v < 0.19.0"
+}
