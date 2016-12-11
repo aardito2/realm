@@ -4,6 +4,9 @@
 ## Usage
 
 ### JavaScript
+```shell
+npm install @aardito2/realm
+```
 
 #### createStore(elmStore, initialState = {}, enhancer)
 ```javascript
