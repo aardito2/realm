@@ -4,6 +4,7 @@ import Realm exposing (updateState)
 
 import Platform exposing (programWithFlags)
 import String exposing (toUpper)
+import Json.Decode
 
 port nextState : Model -> Cmd msg
 

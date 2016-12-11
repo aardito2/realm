@@ -3,11 +3,16 @@
 import React, { PropTypes } from 'react';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
-import { createStore, createAction } from '../lib';
+import { createStore, createAction, applyMiddleware } from '../lib';
+import createLogger from 'redux-logger';
 import elmStore from './store.elm';
 
 // STORE
-const store = createStore(elmStore.Store, ({ value: 0, inputString: '' , user: null }));
+const store = createStore(
+  elmStore.Store,
+  ({ value: 0, inputString: '', user: null }),
+  applyMiddleware(createLogger())
+);
 
 // ACTIONS
 const INCREMENT = 'increment';
@@ -56,7 +61,7 @@ const mapDispatch = dispatch => ({
   incrementValue: () => dispatch(increment()),
   decrementValue: () => dispatch(decrement()),
   setInput: evt => dispatch(setString(evt.target.value)),
-  userSet: () => dispatch(setUser({ username: 'username', age: 12 }))
+  userSet: () => dispatch(setUser({ username: 'username', age: 42 }))
 });
 
 const OuterComponent = connect(mapState, mapDispatch)(InnerComponent);

@@ -5,7 +5,7 @@
 
 ### JavaScript
 
-#### createStore(elmStore, initialState = {})
+#### createStore(elmStore, initialState = {}, enhancer)
 ```javascript
 // using elm-webpack-loader
 import elmStore from './store.elm';
@@ -13,6 +13,10 @@ import elmStore from './store.elm';
 const initialState = {};
 const store = createStore(elmStore.Store, initialState);
 ```
+
+#### applyMiddleware
+See <a href="https://github.com/reactjs/redux/blob/master/docs/api/applyMiddleware.md">Redux docs</a>.
+
 #### createAction(actionType) => payload => action
 ```javascript
 const INCREMENT = 'increment';
@@ -21,7 +25,7 @@ const increment = createAction(INCREMENT);
 const SET_STRING = 'set_string';
 const setString = createAction(SET_STRING);
 ```
-#### dispatch(action)
+#### store.dispatch(action)
 ```javascript
 dispatch(increment());
 dispatch(setString('foo'));
