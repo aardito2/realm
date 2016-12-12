@@ -41,6 +41,8 @@ elm-package install @aardito2/realm
 
 Your Elm file should be a Platform.programWithFlags. In main, your update should use Realm.updateState, which takes an outgoing port and an update function and returns a new update function which will automatically send your updated state back to JavaScript.
 
+Your outgoing port will have the signature `model -> Cmd msg`. *This port must be named nextState!*
+
 For each action used in JavaScript, two things are required:
 
 1) An incoming port with the same name as the action type.
