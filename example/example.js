@@ -40,7 +40,6 @@ const InnerComponent = ({
     <button onClick={incrementValue}>+</button>
     <input onInput={setInput} />
     {inputString}
-    {() => console.log('inputString: ', inputString)}
     <button onClick={userSet}>SET TEST USER</button>
     {user && user.username}
     {user && user.age}
